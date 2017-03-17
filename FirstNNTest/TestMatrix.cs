@@ -3,10 +3,10 @@
 namespace FirstNNTest
 {
     [TestClass]
-    public class UnitTest1
+    public class TestMatrix
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestArray()
         {
         }
     }
