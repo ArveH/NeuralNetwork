@@ -14,18 +14,34 @@ namespace NNConsole
         {
             //TrySomething();
 
-            var x = Matrix<double>.Build.DenseOfArray(new double[,]
+            var x = Matrix<double>.Build.DenseOfArray(new[,]
             {
-                {3, 5},
-                {5, 1},
-                {10, 2}
+                {3.0, 5.0},
+                {5.0, 1.0},
+                {10.0, 2.0}
             });
-            var y = Matrix<double>.Build.DenseOfArray(new double[,] { { 0.75 }, { 0.82 }, { 0.93 } });
+            var y = Matrix<double>.Build.DenseOfArray(new[,] { { 0.75 }, { 0.82 }, { 0.93 } });
 
             var nn = new NeuralNetwork(InputLayerSize, OutputLayerSize, HiddenLayerSize);
-            var cost1 = nn.ConstFunctionPrime(x, y);
-            nn.Print("djW1", cost1.djW1);
-            nn.Print("djW2", cost1.djW2);
+            var cost1 = nn.ConstFunction(x, y);
+            var cost1Prime = nn.ConstFunctionPrime(x, y);
+            nn.Print("djW1", cost1Prime.djW1);
+            nn.Print("djW2", cost1Prime.djW2);
+
+            double scalar = 3;
+            nn.W1 = nn.W1 + cost1Prime.djW1.Map(v => v*scalar);
+            nn.W2 = nn.W2 + cost1Prime.djW2.Map(v => v*scalar);
+
+            var cost2 = nn.ConstFunction(x, y);
+            Console.WriteLine($"Cost1: {cost1}");
+            Console.WriteLine($"Cost2: {cost2}");
+
+            cost1Prime = nn.ConstFunctionPrime(x, y);
+            nn.W1 = nn.W1 - cost1Prime.djW1.Map(v => v * scalar);
+            nn.W2 = nn.W2 - cost1Prime.djW2.Map(v => v * scalar);
+            var cost3 = nn.ConstFunction(x, y);
+            Console.WriteLine($"Cost2: {cost2}");
+            Console.WriteLine($"Cost3: {cost3}");
 
             Console.Write("Press a key...");
             Console.ReadKey();
