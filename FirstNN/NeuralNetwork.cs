@@ -26,11 +26,11 @@ namespace FirstNN
             W1 = Matrix<double>
                 .Build.Dense(_inputLayerSize, _hiddenLayerSize)
                 .Map(v => rnd.NextDouble());
-            Print("w1", W1);
+            //Print("w1", W1);
             W2 = Matrix<double>
                 .Build.Dense(_hiddenLayerSize, _outputLayaerSize)
                 .Map(v => rnd.NextDouble());
-            Print("w2", W2);
+            //Print("w2", W2);
         }
 
         public Matrix<double> Forward(Matrix<double> x)
