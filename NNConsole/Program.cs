@@ -20,11 +20,13 @@ namespace NNConsole
                 {5, 1},
                 {10, 2}
             });
-            var y = Matrix<double>.Build.DenseOfArray(new double[,] { { 75 }, { 82 }, { 93 } });
+            var y = Matrix<double>.Build.DenseOfArray(new double[,] { { 0.75 }, { 0.82 }, { 0.93 } });
 
             var nn = new NeuralNetwork(InputLayerSize, OutputLayerSize, HiddenLayerSize);
-            var result = nn.ConstFunctionPrime(x, y);
- 
+            var cost1 = nn.ConstFunctionPrime(x, y);
+            nn.Print("djW1", cost1.djW1);
+            nn.Print("djW2", cost1.djW2);
+
             Console.Write("Press a key...");
             Console.ReadKey();
         }

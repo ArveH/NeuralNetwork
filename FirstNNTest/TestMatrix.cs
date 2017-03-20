@@ -8,7 +8,7 @@ namespace FirstNNTest
         [TestMethod]
         public void TestArray()
         {
-            //NeuralNetwork.Sigmoid(0.3).Should().Be(SpecialFunctions.Logistic(0.3));
+
         }
     }
 }
