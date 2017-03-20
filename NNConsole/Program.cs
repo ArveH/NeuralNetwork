@@ -41,6 +41,9 @@ namespace NNConsole
             }
             Console.WriteLine($"\n\nInitial cost: {initialScore}");
             Console.WriteLine($"Last cost: {nn.ConstFunction(x, y)}");
+            nn.Print("y", y);
+            nn.Print("yHat", nn.Forward(x));
+
 
             Console.Write("Press a key...");
             Console.ReadKey();
