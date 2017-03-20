@@ -24,9 +24,9 @@ namespace FirstNN
             _hiddenLayerSize = hiddenLayerSize;
 
             _w1 = Matrix<double>.Build.Random(_inputLayerSize, _hiddenLayerSize);
-            //Print("w1", w1);
+            Print("w1", _w1);
             _w2 = Matrix<double>.Build.Random(_hiddenLayerSize, _outputLayaerSize);
-            //Print("w2", w2);
+            Print("w2", _w2);
         }
 
         public void Forward(Matrix<double> x)
@@ -60,7 +60,7 @@ namespace FirstNN
             return m.Map(v => Math.Exp(-v) / Math.Pow(1 + Math.Exp(-v), 2));
         }
 
-        public void ConstFunctionPrime(
+        public (Matrix<double> djW1, Matrix<double> djW2) ConstFunctionPrime(
             Matrix<double> x, 
             Matrix<double> y)
         {
@@ -69,8 +69,15 @@ namespace FirstNN
             //Print("firstPart", firstPart);
             var delta3 = firstPart.PointwiseMultiply(SigmoidPrime(_z3));
             //Print("delta3", delta3);
-            var dJw2 = _a2.TransposeThisAndMultiply(delta3);
-            //Print("djW2", dJw2);
+            var dJW2 = _a2.TransposeThisAndMultiply(delta3);
+            Print("djW2", dJW2);
+
+            var delta2 = delta3.TransposeAndMultiply(_w2).PointwiseMultiply(SigmoidPrime(_z2));
+            //Print("delta2", delta2);
+            var dJW1 = x.TransposeThisAndMultiply(delta2);
+            Print("dJW1", dJW1);
+
+            return (dJW1, dJW2);
         }
     }
 }

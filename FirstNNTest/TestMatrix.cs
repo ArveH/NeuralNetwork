@@ -1,7 +1,4 @@
-﻿using FirstNN;
-using FluentAssertions;
-using MathNet.Numerics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FirstNNTest
 {

@@ -1,8 +1,6 @@
 ﻿using System;
 using FirstNN;
-using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace NNConsole
 {
@@ -25,8 +23,8 @@ namespace NNConsole
             var y = Matrix<double>.Build.DenseOfArray(new double[,] { { 75 }, { 82 }, { 93 } });
 
             var nn = new NeuralNetwork(InputLayerSize, OutputLayerSize, HiddenLayerSize);
-            nn.ConstFunctionPrime(x, y);
-
+            var result = nn.ConstFunctionPrime(x, y);
+ 
             Console.Write("Press a key...");
             Console.ReadKey();
         }
