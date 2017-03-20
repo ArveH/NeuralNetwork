@@ -78,7 +78,7 @@ namespace FirstNN
             return j;
         }
 
-        public (Matrix<double> djW1, Matrix<double> djW2) ConstFunctionPrime(
+        public (Matrix<double> dJdW1, Matrix<double> dJdW2) ConstFunctionPrime(
             Matrix<double> x, 
             Matrix<double> y)
         {
@@ -87,15 +87,15 @@ namespace FirstNN
             //Print("firstPart", firstPart);
             var delta3 = firstPart.PointwiseMultiply(SigmoidPrime(_z3));
             //Print("delta3", delta3);
-            var dJW2 = _a2.TransposeThisAndMultiply(delta3);
-            //Print("djW2", dJW2);
+            var dJdW2 = _a2.TransposeThisAndMultiply(delta3);
+            //Print("dJdW2", dJdW2);
 
             var delta2 = delta3.TransposeAndMultiply(W2).PointwiseMultiply(SigmoidPrime(_z2));
             //Print("delta2", delta2);
-            var dJW1 = x.TransposeThisAndMultiply(delta2);
-            //Print("dJW1", dJW1);
+            var dJdW1 = x.TransposeThisAndMultiply(delta2);
+            //Print("dJdW1", dJdW1);
 
-            return (dJW1, dJW2);
+            return (dJdW1, dJdW2);
         }
     }
 }
